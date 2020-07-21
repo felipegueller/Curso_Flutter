@@ -41,4 +41,8 @@ main(List<String> args) {
   var nomes = ["Felipe", "Ana", "Gui", "Robson", "Geninpapo", "Leléto"];
   var nomesGrandesFn = (String nome) => nome.length >= 4;
   print(filtrarV2(nomes, nomesGrandesFn));
+
+  var inteiros = [1, 5, 23, 65, 43, 76, 89, 120, 234, 643, 455];
+  var inteirosIntervalo = (int inteiro) => inteiro <= 100 && inteiro >= 0;
+  print(filtrarV2(inteiros, inteirosIntervalo));
 }
