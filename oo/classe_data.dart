@@ -13,8 +13,14 @@ class Data {
   }
   */
 
-  void imprimirData() {
-    print("${this.dia}/${this.mes}/${this.ano}");
+  String imprimirDataFormatada() {
+    return "${this.dia}/${this.mes}/${this.ano}";
+  }
+
+  // chamado automaticamente quando escreve apenas o nome da instância
+  String toString() {
+    //return "${this.dia}/${this.mes}/${this.ano}";
+    return imprimirDataFormatada();
   }
 }
 
@@ -25,12 +31,19 @@ main(List<String> args) {
   dataAniversario.ano = 2020;
 
   // maneira pouco usual
-  print("${dataAniversario.dia}/${dataAniversario.mes}/${dataAniversario.ano}");
+  // print("${dataAniversario.dia}/${dataAniversario.mes}/${dataAniversario.ano}");
+  String d1 = dataAniversario.imprimirDataFormatada();
 
   var dataCompra = new Data();
   dataCompra.dia = 12;
   dataCompra.mes = 10;
   dataCompra.ano = 2021;
 
-  dataCompra.imprimirData();
+  print("A data de aniversario é $d1");
+  print("A data da compra foi ${dataCompra.imprimirDataFormatada()}");
+
+  // Depois de implementar o método toString
+  // pode ser explicíto ou implícito
+  print(dataAniversario);
+  print(dataCompra.toString());
 }
