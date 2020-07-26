@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../oo/carro.dart';
+import '../modelo/carro.dart';
 
 main(List<String> args) {
   int velMaxima;

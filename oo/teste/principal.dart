@@ -1,4 +1,4 @@
-import 'pessoa.dart';
+import '../modelo/pessoa.dart';
 
 main() {
   var p1 = new Pessoa("Felipe Gueller", "99946-5153", 22);
