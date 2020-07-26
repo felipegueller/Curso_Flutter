@@ -31,4 +31,8 @@ class Carro {
       return this.velocidadeAtual;
     }
   }
+
+  int freadaBrusca() {
+    return this.velocidadeAtual = 0;
+  }
 }
