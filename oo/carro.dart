@@ -1,13 +1,24 @@
 class Carro {
   int velocidadeMaxima;
-  int velocidadeAtual = 0;
+  int _velocidadeAtual = 0;
 
   Carro(int velocidadeMaxima) {
     this.velocidadeMaxima = velocidadeMaxima;
   }
 
+  int get velocidadeAtual{
+    return this._velocidadeAtual;
+  }
+
+  void set velocidadeAtual(int velocidadeAtual){
+      bool deltaValido = (this._velocidadeAtual - velocidadeAtual).abs() <= 5;
+      if(deltaValido){
+        this._velocidadeAtual = velocidadeAtual;
+      }
+  }
+
   bool estaNoLimite() {
-    if (this.velocidadeAtual == this.velocidadeMaxima) {
+    if (this._velocidadeAtual == this.velocidadeMaxima) {
       return true;
     } else {
       return false;
@@ -16,23 +27,23 @@ class Carro {
 
   int acelerar() {
     if (estaNoLimite()) {
-      return this.velocidadeAtual;
+      return this._velocidadeAtual;
     } else {
-      this.velocidadeAtual += 5;
-      return this.velocidadeAtual;
+      this._velocidadeAtual += 5;
+      return this._velocidadeAtual;
     }
   }
 
   int frear() {
-    if (this.velocidadeAtual <= 0) {
-      return this.velocidadeAtual;
+    if (this._velocidadeAtual <= 0) {
+      return this._velocidadeAtual;
     } else {
-      this.velocidadeAtual -= 5;
-      return this.velocidadeAtual;
+      this._velocidadeAtual -= 5;
+      return this._velocidadeAtual;
     }
   }
 
   int freadaBrusca() {
-    return this.velocidadeAtual = 0;
+    return this._velocidadeAtual = 0;
   }
 }

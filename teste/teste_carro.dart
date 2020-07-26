@@ -19,7 +19,13 @@ main(List<String> args) {
     print("#\t 5 - Sair             #");
     print("###############################");
     stdout.write("Escolha a opção desejada:");
-    opcao = int.parse(stdin.readLineSync());
+    var aux = stdin.readLineSync();
+    // teste para garantir que o programa continue executando, caso não digite nenhuma opção.
+    if (aux != "") {
+      opcao = int.parse(aux);
+    } else {
+      opcao = -1;
+    }
     switch (opcao) {
       case 1:
         if (!c1.estaNoLimite()) {
@@ -59,7 +65,7 @@ main(List<String> args) {
           print("Pisando com tudo no freio!!!!");
           for (String s = "."; s != "......"; s += ".") {
             print("$s");
-            sleep(const Duration(seconds:1));
+            sleep(const Duration(seconds: 1));
           }
           velocidade = c1.freadaBrusca();
           print("O carro parou, sua velocidade agora é de $velocidade km/h.");
@@ -67,7 +73,7 @@ main(List<String> args) {
           print("Pisando com tudo no freio!!!!");
           for (String s = "."; s != "..."; s += ".") {
             print("$s");
-            sleep(const Duration(seconds:1));
+            sleep(const Duration(seconds: 1));
           }
           velocidade = c1.freadaBrusca();
           print("O carro parou, sua velocidade agora é de $velocidade km/h.");
