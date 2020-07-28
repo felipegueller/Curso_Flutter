@@ -15,4 +15,7 @@ main(List<String> args) {
   print(multiplicao(4, 3));
   print(divisao(12, 3));
   print(restoDivisao(19));
+
+  var concat = (String s1, String s2) => "$s1 $s2";
+  print(concat("Hello", "World!"));
 }

@@ -9,7 +9,7 @@ class ItemOS {
 
   double get preco {
     if (servico != null && _preco == null) {
-      _preco = servico.precoComDescoto;
+      _preco = servico.precoComDescoto + servico.valorTotalItens;
     }
     return _preco;
   }
