@@ -12,10 +12,20 @@ main(List<String> args) {
         ItemServico(
             quantidade: 4,
             produto: Produto(
-                codigo: 23,
-                nome: "Pneu Pirelli",
-                preco: 300.00,
-                desconto: 0.05))
+                  codigo: 23,
+                  nome: "Pneu Pirelli",
+                  preco: 300.00,
+                  desconto: 0.05
+                )
+        ),
+        ItemServico(
+          quantidade: 20,
+          produto: Produto(
+            codigo: 13,
+            nome: "Parafusos de Roda",
+            preco: 5.00
+          )
+        )
       ]);
 
   print("Valor total do serviço: ${servico.valorTotalItens}");
