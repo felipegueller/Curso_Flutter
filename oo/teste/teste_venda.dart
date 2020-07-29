@@ -45,10 +45,8 @@ main() {
       " ${venda.itens[1].produto.nome}");
 
   print("O CPF do cliente: ${venda.cliente.cpf}");
-  
-  /*
+
   var pegarApenasONomeDosProdutos = (nome) => venda.itens[nome].produto.nome;
   var nomesProdutos = venda.itens.map(pegarApenasONomeDosProdutos);
   print(nomesProdutos);
-  */
 }
