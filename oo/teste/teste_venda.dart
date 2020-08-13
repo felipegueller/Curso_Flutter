@@ -46,7 +46,11 @@ main() {
 
   print("O CPF do cliente: ${venda.cliente.cpf}");
 
-  var pegarApenasONomeDosProdutos = (nome) => venda.itens[nome].produto.nome;
-  var nomesProdutos = venda.itens.map(pegarApenasONomeDosProdutos);
-  print(nomesProdutos);
+  for (int i = 0; i < venda.itens.length; i++) {
+    print("Produto: " + venda.itens[i].produto.nome);
+  }
+
+  // var pegarApenasONomeDosProdutos = (nome) => venda.itens[2].produto.nome;
+  // var nomesProdutos = venda.itens.map(pegarApenasONomeDosProdutos);
+  // print(nomesProdutos);
 }
