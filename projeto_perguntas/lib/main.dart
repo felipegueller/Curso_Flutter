@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
 import './resposta.dart';
+import './resultado.dart';
 
 main(List<String> args) => runApp(new PerguntaApp());
 
@@ -57,12 +58,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                   // operador spread (...) adiciona todos os valores da lista em outra lista
                 ],
               )
-            : Center(
-                child: Text(
-                  'Parabéns!',
-                  style: TextStyle(fontSize: 28),
-                ),
-              ), // fim da operação ternária
+            : resultado(), // fim da operação ternária
       ),
     );
   }
