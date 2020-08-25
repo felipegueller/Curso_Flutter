@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class resultado  extends StatelessWidget {
+class Resultado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-                child: Text(
-                  'Parabéns2!',
-                  style: TextStyle(fontSize: 28),
-                ),
-              ),;
+      child: Text(
+        'Parabéns2!',
+        style: TextStyle(fontSize: 28),
+      ),
+    );
   }
 }

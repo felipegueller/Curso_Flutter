@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import './questao.dart';
-import './resposta.dart';
+import './questionario.dart';
 import './resultado.dart';
 
 main(List<String> args) => runApp(new PerguntaApp());
@@ -25,9 +24,11 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   // altera o indice para trocar de pergunta
   void _responder() {
-    setState(() {
-      _perguntaSelecionada++;
-    });
+    if (temPerguntaSelecionada) {
+      setState(() {
+        _perguntaSelecionada++;
+      });
+    }
   }
 
   bool get temPerguntaSelecionada {
@@ -36,29 +37,18 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada]['respostas']
-        : null;
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text("Perguntas"),
         ),
         body: temPerguntaSelecionada // operador ternério
-            ? Column(
-                children: <Widget>[
-                  Questao(_perguntas[_perguntaSelecionada]['texto']),
-
-                  /* Pegou a lista de Strings, transformou para uma lista de Widgets e depois o resultado do map em uma lista
-             depois o spread colocou la lista de widget acima em children */
-                  ...respostas
-                      .map((texto) => Resposta(texto, _responder))
-                      .toList(),
-                  // operador spread (...) adiciona todos os valores da lista em outra lista
-                ],
+            ? Questionario(
+                perguntas: _perguntas,
+                perguntaSelecionada: _perguntaSelecionada,
+                quandoResponder: _responder,
               )
-            : resultado(), // fim da operação ternária
+            : Resultado(), // fim da operação ternária
       ),
     );
   }
