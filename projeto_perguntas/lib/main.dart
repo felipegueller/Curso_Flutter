@@ -7,28 +7,47 @@ main(List<String> args) => runApp(new PerguntaApp());
 // dentro do genérics passamos qual o componente stateful que a gente deseja controlar
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var _pontuacaoTotal = 0;
   final _perguntas = [
     {
       'texto': "Qual é a sua cor favorita?",
-      'respostas': ["Verde", "Amarelo", "Vermelho", "Preto"],
+      'respostas': [
+        {"texto": "Verde", "pontuacao": 10},
+        {"texto": "Amarelo", "pontuacao": 5},
+        {"texto": "Vermelho", "pontuacao": 3},
+        {"texto": "Preto", "pontuacao": 1},
+      ],
     },
     {
       'texto': "Qual é o seu animal favorito?",
-      'respostas': ["Cavalo", "Porquinho da índia", "Coelho", "Aveztruz"],
+      'respostas': [
+        {"texto": "Porquinho da índia", "pontuacao": 8},
+        {"texto": "Coelho", "pontuacao": 10},
+        {"texto": "Aveztruz", "pontuacao": 5},
+        {"texto": "Cavalo", "pontuacao": 4},
+      ],
     },
     {
       'texto': "Qual é a sua marca de chocolates favorita?",
-      'respostas': ["Cacau Show", "Garoto", "Nestle", "Arcor"],
+      'respostas': [
+        {"texto": "Cacau Show", "pontuacao": 6},
+        {"texto": "Garoto", "pontuacao": 7},
+        {"texto": "Nestle", "pontuacao": 8},
+        {"texto": "Arcor", "pontuacao": 3},
+      ],
     },
   ];
 
   // altera o indice para trocar de pergunta
-  void _responder() {
+  void _responder(int pontuacao) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
+        _pontuacaoTotal += pontuacao;
       });
     }
+
+    print(_pontuacaoTotal);
   }
 
   bool get temPerguntaSelecionada {

@@ -5,7 +5,7 @@ import './resposta.dart';
 class Questionario extends StatelessWidget {
   final List<Map<String, Object>> perguntas;
   final int perguntaSelecionada;
-  final void Function() quandoResponder;
+  final void Function(int) quandoResponder;
 
   Questionario({
     @required this.perguntas,
@@ -19,17 +19,19 @@ class Questionario extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = temPerguntaSelecionada
+    List<Map<String, Object>> respostas = temPerguntaSelecionada
         ? perguntas[perguntaSelecionada]['respostas']
         : null;
 
     return Column(
       children: <Widget>[
         Questao(perguntas[perguntaSelecionada]['texto']),
-
-        /* Pegou a lista de Strings, transformou para uma lista de Widgets e depois o resultado do map em uma lista
-             depois o spread colocou na lista de widget acima em children */
-        ...respostas.map((texto) => Resposta(texto, quandoResponder)).toList(),
+        ...respostas.map((resp) {
+          return Resposta(
+            resp['texto'],
+            () => quandoResponder(resp['pontuacao']),
+          );
+        }).toList(),
         // operador spread (...) adiciona todos os valores da lista em outra lista
       ],
     );
