@@ -20,7 +20,7 @@ main() {
 }
 
 // Quando você coloca o parâmetro entre colchetes ele passa a ser opcional;
-// na frente você declara o valor padrão
+// na frente você declara o valor padrão que a variável receberá caso você não passe nenhum valor quando for chamar ela.
 int numeroAleatorio([int maximo = 11]) {
   return Random().nextInt(maximo);
 }
