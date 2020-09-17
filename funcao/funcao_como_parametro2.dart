@@ -7,6 +7,12 @@ int executarPor(int qtd, String Function(String) fn, String valor) {
   return textoCompleto.length;
 }
 
+String executarPor2(int qtd, Function(String) fn, String valor) {
+  for (int i = 0; i < qtd; i++) {
+    fn(valor);
+  }
+}
+
 main(List<String> args) {
   print("Teste!");
   var meuPrint = (String valor) {
@@ -15,4 +21,6 @@ main(List<String> args) {
   };
   int tamanho = executarPor(10, meuPrint, "Muito legal!");
   print("O tamanho da String é $tamanho em caracteres");
+
+  executarPor2(3, print, 'Hello Wolrd!');
 }

@@ -1,5 +1,5 @@
 // retorna uma função com o valor inteiro
-Function(int) somaParcial(int a) {
+int Function(int) somaParcial(int a) {
   int c = 0; // variáveis dentro da função também poderam participar da soma
 
   return (int b) => a + b + c;
@@ -16,4 +16,8 @@ main() {
   print(somaCom10(3));
   print(somaCom10(7));
   print(somaCom10(19));
+
+  var somaCom8 = somaParcial(8);
+
+  print(somaCom8(5));
 }

@@ -18,4 +18,9 @@ main(List<String> args) {
 
   var concat = (String s1, String s2) => "$s1 $s2";
   print(concat("Hello", "World!"));
+
+  // Função anônima do tipo Arrow
+  var nomeCompleto =
+      ({String nome, String sobrenome}) => nome + " " + sobrenome;
+  print(nomeCompleto(nome: 'Felipe', sobrenome: "Gueller"));
 }
