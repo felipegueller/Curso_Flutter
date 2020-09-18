@@ -27,6 +27,9 @@ List filtrarV2<E>(List<E> lista, bool Function(E) fn) {
     }
   }
 
+  // Está lógica noã funciona
+  // listaFiltrada = lista.where(fn);
+
   return listaFiltrada;
 }
 

@@ -4,7 +4,7 @@ main(List<String> args) {
   // essas funções podem ser utilizadas em várias listas diferentes, ou seja,
   // permite o reuso de código com a combinação do Where
   bool Function(double) notasBoasFn = (double nota) => nota >= 7;
-  bool Function(double) notasMuitoBoasFn = (double nota) => nota >= 8.8;
+  var notasMuitoBoasFn = (double nota) => nota >= 8.8;
 
   // se o elemento dor verdadeiro, notas boas recebe o valor
   var notasBoas = notas.where(notasBoasFn);
