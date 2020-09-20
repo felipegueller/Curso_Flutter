@@ -48,4 +48,8 @@ main(List<String> args) {
   var inteiros = [1, 5, 23, 65, 43, 76, 89, 120, 234, 643, 455];
   var inteirosIntervalo = (int inteiro) => inteiro <= 100 && inteiro >= 0;
   print(filtrarV2(inteiros, inteirosIntervalo));
+
+  var decimais = [1.8, 3.3, 4.3, 5.8, 6.4, 7.9];
+  var decimaisIntervalo = (double decimal) => decimal >= 3.0 && decimal <= 6.0;
+  print(filtrarV2(decimais, decimaisIntervalo));
 }

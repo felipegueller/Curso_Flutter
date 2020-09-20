@@ -29,3 +29,5 @@ String juntar(String acumulador, String elemento) {
   print("$acumulador => $elemento");
   return "$acumulador, $elemento";
 }
+
+// String Function(String, String) juntar = (acumulador, elemento) => acumulador + elemento;
