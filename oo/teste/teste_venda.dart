@@ -50,7 +50,43 @@ main() {
     print("Produto: " + venda.itens[i].produto.nome);
   }
 
-  // var pegarApenasONomeDosProdutos = (nome) => venda.itens[2].produto.nome;
-  // var nomesProdutos = venda.itens.map(pegarApenasONomeDosProdutos);
-  // print(nomesProdutos);
+  var pegarApenasONomeDosProdutos = (nome) => venda.itens[2].produto.nome;
+  var nomesProdutos = venda.itens.map(pegarApenasONomeDosProdutos);
+  print(nomesProdutos);
+
+  var venda2 = Venda(
+    cliente: Cliente(
+      nome: "Jorge Ciborg",
+      cpf: "231.421.534-65",
+    ),
+    itens: <VendaItem>[
+      VendaItem(
+        produto: Produto(
+          codigo: 456,
+          nome: "Tênis Adidas Running",
+          preco: 256.66,
+          desconto: 0.15,
+        ),
+        quantidade: 1,
+      ),
+      VendaItem(
+        produto: Produto(
+          codigo: 31,
+          nome: 'Coleira para cachorro',
+          preco: 15.00,
+          desconto: 0.05,
+        ),
+      ),
+    ],
+  );
+
+  print('Referentes a venda 2: ');
+  print('Cliente: ${venda2.cliente.nome}');
+
+  for (var item in venda2.itens) {
+    print("Nome: ${item.produto.nome}");
+    print("Preço: R\$${item.produto.precoComDescoto}\n");
+  }
+
+  print('O valor total referente a segunda venda foi  R\$${venda2.valorTotal}');
 }

@@ -66,7 +66,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
         appBar: AppBar(
           title: Text("Perguntas"),
         ),
-        body: temPerguntaSelecionada // operador ternério
+        body: temPerguntaSelecionada // operador ternário
             ? Questionario(
                 perguntas: _perguntas,
                 perguntaSelecionada: _perguntaSelecionada,
