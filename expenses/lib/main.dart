@@ -35,8 +35,6 @@ class MyHomePage extends StatelessWidget {
         //centerTitle: true, // Define a posição ao centro
       ),
       body: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceAround, // Eixo Principal da Column (eixo Y)
         crossAxisAlignment:
             CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
         children: <Widget>[
@@ -102,6 +100,38 @@ class MyHomePage extends StatelessWidget {
                 ),
               );
             }).toList(),
+          ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(
+                  10), // espaçamento interno utilizando o widget Padding
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Título',
+                    ),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Valor (R\$)',
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .end, // Eixo principal da Row ( Eixo X)
+                    children: [
+                      FlatButton(
+                        child: Text('Nova Transação'),
+                        textColor: Colors.purple,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
