@@ -1,5 +1,6 @@
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Pacote responsável pela formatação da data
 
 main() => runApp(ExpensesApp());
 
@@ -64,7 +65,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        tr.value.toString(),
+                        'R\$ ${tr.value.toStringAsFixed(2)}', // toStringAsFixed permite definir a quantidade de casas decimais
                         style: TextStyle(
                           fontWeight: FontWeight.bold, // peso da fonte
                           fontSize: 20,
@@ -83,7 +84,8 @@ class MyHomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          tr.date.toString(),
+                          DateFormat('d MMM y')
+                              .format(tr.date), // permite a formatação da data
                           style: TextStyle(
                             color: Colors.grey,
                           ),
