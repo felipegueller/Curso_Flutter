@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'transaction_form.dart';
 import 'transaction_list.dart';
 import '../models/transaction.dart';
+import 'dart:math';
 
 class TransactionUser extends StatefulWidget {
   @override
@@ -24,12 +25,27 @@ class _TransactionUserState extends State<TransactionUser> {
     ),
   ];
 
+  // Função responsavel por adicionar uma transação a lista de transações
+  _addTransaction(String newTitle, double newValue) {
+    final newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: newTitle,
+      value: newValue,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _transactions
+          .add(newTransaction); // Adicionando uma nova transação a lista
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionList(_transactions),
-        TransactionForm(),
+        TransactionList(_transactions), // Lista de Transações
+        TransactionForm(_addTransaction), // Formulário de transações
       ],
     );
   }
