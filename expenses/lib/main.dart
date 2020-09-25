@@ -1,6 +1,6 @@
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart'; // importando o material desing
-import 'package:intl/intl.dart'; // Pacote responsável pela formatação da data
+import './components/transaction_list.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -12,6 +12,9 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
   final _transactions = [
     Transaction(
       id: 't1',
@@ -45,62 +48,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5, // efeito de sombreamento
             ),
           ),
-          Column(
-            children: _transactions.map((tr) {
-              // children recebe direto uma lista de transaction
-              // tr -> represensa uma instância de transaction
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        // pesquisar sobre
-                        horizontal: 15,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        // (BoxDecoration) Widget que permite mexer com a borda do container
-                        border: Border.all(
-                          color: Colors.purple, // cor da borda
-                          width: 2, // largura da borda
-                        ),
-                      ),
-                      padding: EdgeInsets.all(
-                          10), // Padding de 10px para as 4 direções
-                      child: Text(
-                        'R\$ ${tr.value.toStringAsFixed(2)}', // toStringAsFixed permite definir a quantidade de casas decimais
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold, // peso da fonte
-                          fontSize: 20, // tamanho da fonte
-                          color: Colors.purple, // cor da fonte
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment
-                          .start, // Eixo cruzado da Column (Eixo x)
-                      children: <Widget>[
-                        Text(
-                          tr.title, // Titulo da transação
-                          style: TextStyle(
-                            fontSize: 16, // Tamanho da fonte
-                            fontWeight: FontWeight.bold, // Peso da fonte
-                          ),
-                        ),
-                        Text(
-                          DateFormat('d MMM y')
-                              .format(tr.date), // Permite a formatação da data
-                          style: TextStyle(
-                            color: Colors.grey, // cor do texto
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+          TransactionList(_transactions),
           Card(
             elevation: 5,
             child: Padding(
@@ -109,11 +57,13 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                    controller: titleController,
                     decoration: InputDecoration(
                       labelText: 'Título',
                     ),
                   ),
                   TextField(
+                    controller: valueController,
                     decoration: InputDecoration(
                       labelText: 'Valor (R\$)',
                     ),
@@ -125,7 +75,10 @@ class MyHomePage extends StatelessWidget {
                       FlatButton(
                         child: Text('Nova Transação'),
                         textColor: Colors.purple,
-                        onPressed: () {},
+                        onPressed: () {
+                          print(titleController.text);
+                          print(valueController.text);
+                        },
                       ),
                     ],
                   ),
