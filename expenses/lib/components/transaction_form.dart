@@ -7,6 +7,20 @@ class TransactionForm extends StatelessWidget {
       onSubmit; // quando o formulário for submetido
 
   TransactionForm(this.onSubmit);
+
+  _submitForm() {
+    final title = titleController.text;
+    // converta o valor para um double, se não conseguir para 0.0
+    final value = double.tryParse(valueController.text) ?? 0.0;
+
+    // Se os dados estiverem inválidos, não retornar nada
+    if (title.isEmpty || value <= 0.0) {
+      return;
+    }
+
+    onSubmit(title, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,12 +32,17 @@ class TransactionForm extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
+              onSubmitted: (_) => _submitForm(),
               decoration: InputDecoration(
                 labelText: 'Título',
               ),
             ),
             TextField(
               controller: valueController,
+              keyboardType: TextInputType.numberWithOptions(
+                  decimal: true), // Adicionando o teclado de numérico
+              onSubmitted: (_) =>
+                  _submitForm(), // onSubmitted precisa de uma void Function(String)
               decoration: InputDecoration(
                 labelText: 'Valor (R\$)',
               ),
@@ -35,12 +54,7 @@ class TransactionForm extends StatelessWidget {
                 FlatButton(
                   child: Text('Nova Transação'),
                   textColor: Colors.purple,
-                  onPressed: () {
-                    final title = titleController.text;
-                    // converta o valor para um double, se não conseguir para 0.0
-                    final value = double.tryParse(valueController.text) ?? 0.0;
-                    onSubmit(title, value);
-                  },
+                  onPressed: _submitForm,
                 ),
               ],
             ),

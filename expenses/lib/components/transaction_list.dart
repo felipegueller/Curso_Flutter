@@ -13,7 +13,7 @@ class TransactionList extends StatelessWidget {
       height: 300, // tamanho do container
       // O ListView precisa ter um componente pai para definir o scroll
       child: ListView.builder(
-        itemCount: transactions.length, // Passando o tamanho da lista
+        itemCount: transactions.length, // Quantidade de itens da lista
         itemBuilder: (ctx, index) {
           // (itemBuilder)Só chama isso no momento que ele for precisando da informação, renderizar a lista toda de uma vez, o que atrapalha a performance do App
           final tr = transactions[index]; // recebe objeto transaction
