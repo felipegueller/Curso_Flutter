@@ -2,6 +2,7 @@ import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart'; // importando o material desing
 import './components/transaction_form.dart';
 import './components/transaction_list.dart';
+import './components/chart.dart';
 import 'models/transaction.dart';
 import 'dart:math';
 
@@ -51,19 +52,33 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo Tênis de Corrida',
-    //   value: 320.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de Luz',
-    //   value: 210.31,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't0',
+      title: 'Conta Antiga',
+      value: 452.66,
+      date: DateTime.now().subtract(Duration(days: 33)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de Corrida',
+      value: 320.99,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de Luz',
+      value: 210.31,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
   ];
+
+  List<Transaction> get _recentTransaction {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7), // pegando a data atual e subtraindo 7 dias
+      ));
+    }).toList();
+  }
 
   // Função responsavel por adicionar uma transação a lista de transações
   _addTransaction(String newTitle, double newValue) {
@@ -112,13 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment:
               CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
           children: <Widget>[
-            Container(
-              child: Card(
-                color: Colors.blue, // cor do Card
-                child: Text('Gráfico'), // texto do card
-                elevation: 5, // efeito de sombreamento
-              ),
-            ),
+            Chart(_recentTransaction), // Widget do gráfico
             TransactionList(_transactions), // Lista de Transações
           ],
         ),
