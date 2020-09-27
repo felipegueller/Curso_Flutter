@@ -16,8 +16,29 @@ class ExpensesApp extends StatelessWidget {
         // primarySwatch recebe um conjunto de cores dentro de um exprectro
         primarySwatch: Colors
             .purple, // recebe uma lista de cores, neste caso uma lista de roxo
-        accentColor: Colors
-            .amber, // recebe apenas uma cor, que passa a ser a cor de realse da aplicação
+        fontFamily: 'Quicksand', // definindo a fonte padrão da aplicação
+        textTheme: TextTheme(
+          // aplicando essas configurações para todo app que usa a referência headline6
+          headline6: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          textTheme: TextTheme(
+            // mudando o título do Appbar (Definindo referências)
+            headline6: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Aplicação de cores para botões flutuantes
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.amber,
+        ),
       ),
     );
   }
@@ -29,19 +50,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 320.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de Luz',
-      value: 210.31,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de Corrida',
+    //   value: 320.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de Luz',
+    //   value: 210.31,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   // Função responsavel por adicionar uma transação a lista de transações
