@@ -26,6 +26,7 @@ class _TransactionFormState extends State<TransactionForm> {
       return;
     }
 
+    // O atributo 'widget' herdado por herança, é responsável por permitir o acesso aos dados de entrada da classe StateFul endo utilizados na classe State.
     widget.onSubmit(title, value);
   }
 

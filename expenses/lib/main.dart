@@ -10,7 +10,16 @@ main() => runApp(ExpensesApp());
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
+    return MaterialApp(
+      home: MyHomePage(),
+      theme: ThemeData(
+        // primarySwatch recebe um conjunto de cores dentro de um exprectro
+        primarySwatch: Colors
+            .purple, // recebe uma lista de cores, neste caso uma lista de roxo
+        accentColor: Colors
+            .amber, // recebe apenas uma cor, que passa a ser a cor de realse da aplicação
+      ),
+    );
   }
 }
 
@@ -48,6 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
       _transactions
           .add(newTransaction); // Adicionando uma nova transação a lista
     });
+
+    // Fechando o modal a após o subimit do formulário
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {

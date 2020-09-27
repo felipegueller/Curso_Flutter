@@ -29,7 +29,8 @@ class TransactionList extends StatelessWidget {
                   decoration: BoxDecoration(
                     // (BoxDecoration) Widget que permite mexer com a borda do container
                     border: Border.all(
-                      color: Colors.purple, // cor da borda
+                      color: Theme.of(context)
+                          .primaryColor, // cor da borda conforme a cor estabelecida no tema
                       width: 2, // largura da borda
                     ),
                   ),
@@ -40,7 +41,7 @@ class TransactionList extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold, // peso da fonte
                       fontSize: 20, // tamanho da fonte
-                      color: Colors.purple, // cor da fonte
+                      color: Theme.of(context).primaryColor, // cor da fonte
                     ),
                   ),
                 ),
