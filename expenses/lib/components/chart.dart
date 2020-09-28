@@ -50,16 +50,24 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransactions.map((tr) {
-          // retorna o widget visual ChartBar
-          return ChartBar(
-            label: tr['day'],
-            value: tr['value'],
-            percentage: (tr['value'] as double) /
-                _weekTotalValue, // retorna a porcentagemem cima do valor do dia / total semena
-          );
-        }).toList(),
+      child: Padding(
+        // adicionando um padding dentro do conteúdo do Card
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions.map((tr) {
+            return Flexible(
+              fit: FlexFit
+                  .tight, // Divide os espaço entre os elementos de forma mais rigorosa(iguais)
+              child: ChartBar(
+                label: tr['day'],
+                value: tr['value'],
+                percentage: (tr['value'] as double) /
+                    _weekTotalValue, // retorna a porcentagemem cima do valor do dia / total semena
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
