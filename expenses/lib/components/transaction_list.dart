@@ -4,13 +4,14 @@ import 'package:intl/intl.dart'; // Pacote responsável pela formatação da dat
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300, // tamanho do container
+      height: 430, // tamanho do container
       // O ListView precisa ter um componente pai para definir o scroll
       child: transactions.isEmpty
           ? Column(
@@ -66,6 +67,12 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat('d MMM y').format(tr.date),
+                    ),
+                    trailing: IconButton(
+                      //Botão para remover uma transação da lista
+                      icon: Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => onRemove(tr.id),
                     ),
                   ),
                 );

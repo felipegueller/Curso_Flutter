@@ -63,8 +63,10 @@ class Chart extends StatelessWidget {
               child: ChartBar(
                 label: tr['day'],
                 value: tr['value'],
-                percentage: (tr['value'] as double) /
-                    _weekTotalValue, // retorna a porcentagemem cima do valor do dia / total semena
+                percentage: _weekTotalValue == 0
+                    ? 0
+                    : (tr['value'] as double) /
+                        _weekTotalValue, // retorna a porcentagemem cima do valor do dia / total semena
               ),
             );
           }).toList(),

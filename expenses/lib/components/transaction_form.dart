@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 /* Essa classe tem que extender Stateful por que os componentes controles tem a sua mudança interna */
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double)
+  final void Function(String, double, DateTime)
       onSubmit; // quando o formulário for submetido
 
   TransactionForm(this.onSubmit);
@@ -15,7 +15,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
-  DateTime _selectedDate;
+  DateTime _selectedDate = DateTime.now();
 
   _submitForm() {
     final title = _titleController.text;
@@ -23,12 +23,12 @@ class _TransactionFormState extends State<TransactionForm> {
     final value = double.tryParse(_valueController.text) ?? 0.0;
 
     // Se os dados estiverem inválidos, não retornar nada
-    if (title.isEmpty || value <= 0.0) {
+    if (title.isEmpty || value <= 0.0 || _selectedDate == null) {
       return;
     }
 
     // O atributo 'widget' herdado por herança, é responsável por permitir o acesso aos dados de entrada da classe StateFul endo utilizados na classe State.
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, _selectedDate);
   }
 
   // função para abrir o modal de data no formulário
