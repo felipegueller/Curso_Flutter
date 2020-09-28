@@ -42,58 +42,30 @@ class TransactionList extends StatelessWidget {
                 // (itemBuilder)Só chama isso no momento que ele for precisando da informação, renderizar a lista toda de uma vez, o que atrapalha a performance do App
                 final tr = transactions[index]; // recebe objeto transaction
                 return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          // pesquisar sobre
-                          horizontal: 15,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          // (BoxDecoration) Widget que permite mexer com a borda do container
-                          border: Border.all(
-                            color: Theme.of(context)
-                                .primaryColor, // cor da borda conforme a cor estabelecida no tema
-                            width: 2, // largura da borda
-                          ),
-                        ),
-                        padding: EdgeInsets.all(
-                            10), // Padding de 10px para as 4 direções
-                        child: Text(
-                          'R\$ ${tr.value.toStringAsFixed(2)}', // toStringAsFixed permite definir a quantidade de casas decimais
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold, // peso da fonte
-                            fontSize: 20, // tamanho da fonte
-                            color:
-                                Theme.of(context).primaryColor, // cor da fonte
-                          ),
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 5,
+                  ),
+                  child: ListTile(
+                    // Widget especialista em listas
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text('R\$${tr.value}'),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment
-                            .start, // Eixo cruzado da Column (Eixo x)
-                        children: <Widget>[
-                          Text(
-                            tr.title, // Titulo da transação
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6, // obetendo as configuraçõse estabelecidas no Material e aplicando ao título
-                            // style: TextStyle(
-                            //   fontSize: 16, // Tamanho da fonte
-                            //   fontWeight: FontWeight.bold, // Peso da fonte
-                            // ),
-                          ),
-                          Text(
-                            DateFormat('d MMM y').format(
-                                tr.date), // Permite a formatação da data
-                            style: TextStyle(
-                              color: Colors.grey, // cor do texto
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
+                    title: Text(
+                      tr.title, // title da transaction
+                      // estilo definido para títulos
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(tr.date),
+                    ),
                   ),
                 );
               },
