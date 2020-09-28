@@ -35,7 +35,8 @@ class Chart extends StatelessWidget {
             .format(weekDay)[0], // Pegando a primeira letra do dia da semana
         'value': totalSum,
       };
-    });
+      // reversed vai reverter a posição da lista
+    }).reversed.toList();
   }
 
   // retorna o valor total da semana

@@ -25,6 +25,11 @@ class ExpensesApp extends StatelessWidget {
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
+          button: TextStyle(
+            // Aplicando estilo padrão para todos os botões da aplicação
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         appBarTheme: AppBarTheme(
           textTheme: TextTheme(
@@ -36,6 +41,7 @@ class ExpensesApp extends StatelessWidget {
             ),
           ),
         ),
+        accentColor: Colors.amber,
         // Aplicação de cores para botões flutuantes
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: Colors.amber,
