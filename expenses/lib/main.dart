@@ -103,27 +103,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Despesas Pessoais'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(
+              context), // context direto do método build
+        ),
+      ],
+      //centerTitle: true, // Define a posição ao centro
+    );
+
+    // Altura total da tela - altura appBar - altura da barra de Status
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Despesas Pessoais'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(
-                context), // context direto do método build
-          ),
-        ],
-        //centerTitle: true, // Define a posição ao centro
-      ),
+      appBar: appBar, // váriavel final
       body: SingleChildScrollView(
         // habilita o scroll(rolagem) na tela
         child: Column(
           crossAxisAlignment:
               CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
           children: <Widget>[
-            Chart(_recentTransaction), // Widget do gráfico
-            TransactionList(
-                _transactions, _removeTransaction), // Lista de Transações
+            Container(
+              height: availableHeight * 0.3,
+              child: Chart(_recentTransaction),
+            ), // Widget do gráfico
+            Container(
+              height: availableHeight * 0.7, // altura resposiva
+              child: TransactionList(_transactions, _removeTransaction),
+            ), // Lista de Transações
           ],
         ),
       ),
