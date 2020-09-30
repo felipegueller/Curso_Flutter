@@ -11,28 +11,33 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? Column(
-            children: [
-              SizedBox(
-                // Widget utilizado para dar espaço entre estruturas
-                height: 20,
-              ),
-              Text(
-                'Nenhuma Transação Cadastrada!',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6, // Aplicando os estilos de texto por referência
-              ),
-              SizedBox(height: 20),
-              Container(
-                height: 200,
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit
-                      .cover, // esssa propriedade alinha a imagem em cima de um elemento com dimensões definidas, no caso dentro da altura do container
-                ),
-              ),
-            ],
+        ? LayoutBuilder(
+            // constraints tem acesso as dimensões do componente
+            builder: (ctx, constraints) {
+              return Column(
+                children: [
+                  SizedBox(
+                    // Widget utilizado para dar espaço entre estruturas
+                    height: 20,
+                  ),
+                  Text(
+                    'Nenhuma Transação Cadastrada!',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6, // Aplicando os estilos de texto por referência
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    height: constraints.maxHeight * 0.6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit
+                          .cover, // esssa propriedade alinha a imagem em cima de um elemento com dimensões definidas, no caso dentro da altura do container
+                    ),
+                  ),
+                ],
+              );
+            },
           )
         : ListView.builder(
             itemCount: transactions.length, // Quantidade de itens da lista
@@ -65,12 +70,19 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('d MMM y').format(tr.date),
                   ),
-                  trailing: IconButton(
-                    //Botão para remover uma transação da lista
-                    icon: Icon(Icons.delete),
-                    color: Theme.of(context).errorColor,
-                    onPressed: () => onRemove(tr.id),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? FlatButton.icon(
+                          onPressed: () => onRemove(tr.id),
+                          icon: Icon(Icons.delete),
+                          label: Text('Excluir'),
+                          textColor: Theme.of(context).errorColor,
+                        )
+                      : IconButton(
+                          //Botão para remover uma transação da lista
+                          icon: Icon(Icons.delete),
+                          color: Theme.of(context).errorColor,
+                          onPressed: () => onRemove(tr.id),
+                        ),
                 ),
               );
             },

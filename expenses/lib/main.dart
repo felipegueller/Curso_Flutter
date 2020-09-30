@@ -105,9 +105,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape = // true para modo retrato
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       title: Text('Despesas Pessoais'),
       actions: [
+        if (isLandscape)
+          IconButton(
+            icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+            onPressed: () {
+              setState(() {
+                _showChart = !_showChart;
+              });
+            }, // context direto do método build
+          ),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () => _openTransactionFormModal(
@@ -130,29 +142,31 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment:
               CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Exibir Gráfico'),
-                Switch(
-                  value: _showChart,
-                  onChanged: (value) {
-                    setState(() {
-                      _showChart = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            if (_showChart)
+            // if (isLandscape)
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text('Exibir Gráfico'),
+            //       Switch(
+            //         value: _showChart,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _showChart = value;
+            //           });
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            if (_showChart || !isLandscape)
               Container(
-                height: availableHeight * 0.3,
+                height: availableHeight * (isLandscape ? 0.8 : 0.3),
                 child: Chart(_recentTransaction),
               ),
-            if (!_showChart)
+            if (!_showChart || !isLandscape)
               // Widget do gráfico
               Container(
-                height: availableHeight * 0.7, // altura resposiva
+                height: availableHeight *
+                    (isLandscape ? 1 : 0.7), // altura resposiva
                 child: TransactionList(_transactions, _removeTransaction),
               ), // Lista de Transações
           ],
