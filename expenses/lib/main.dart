@@ -1,9 +1,9 @@
-import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart'; // importando o material desing
+
 import './components/transaction_form.dart';
 import './components/transaction_list.dart';
 import './components/chart.dart';
-import 'models/transaction.dart';
+import './models/transaction.dart';
 import 'dart:math';
 
 main() => runApp(ExpensesApp());
@@ -36,7 +36,8 @@ class ExpensesApp extends StatelessWidget {
             // mudando o título do Appbar (Definindo referências)
             headline6: TextStyle(
               fontFamily: 'OpenSans',
-              fontSize: 20,
+              // textScaleFactor aumenta a resposividade da fonte médiante as configurações de acessibilidade presentes no dispositivo do usuário
+              fontSize: 20 /*  * MediaQuery.of(context).textScaleFactor*/,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -58,6 +59,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
+  bool _showChart = false;
 
   List<Transaction> get _recentTransaction {
     return _transactions.where((tr) {
@@ -128,14 +130,31 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment:
               CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
           children: <Widget>[
-            Container(
-              height: availableHeight * 0.3,
-              child: Chart(_recentTransaction),
-            ), // Widget do gráfico
-            Container(
-              height: availableHeight * 0.7, // altura resposiva
-              child: TransactionList(_transactions, _removeTransaction),
-            ), // Lista de Transações
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Exibir Gráfico'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+            if (_showChart)
+              Container(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransaction),
+              ),
+            if (!_showChart)
+              // Widget do gráfico
+              Container(
+                height: availableHeight * 0.7, // altura resposiva
+                child: TransactionList(_transactions, _removeTransaction),
+              ), // Lista de Transações
           ],
         ),
       ),
