@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import './adaptative_button.dart';
+import './adaptative_textfield.dart';
 
 /* Essa classe tem que extender Stateful por que os componentes controles tem a sua mudança interna */
 class TransactionForm extends StatefulWidget {
@@ -70,22 +71,16 @@ class _TransactionFormState extends State<TransactionForm> {
           ),
           child: Column(
             children: [
-              TextField(
+              AdaptativeTextField(
                 controller: _titleController,
-                onSubmitted: (_) => _submitForm(),
-                decoration: InputDecoration(
-                  labelText: 'Título',
-                ),
+                onSubmitted: (_) => _submitForm,
+                label: 'Título',
               ),
-              TextField(
+              AdaptativeTextField(
                 controller: _valueController,
-                keyboardType: TextInputType.numberWithOptions(
-                    decimal: true), // Adicionando o teclado de numérico
-                onSubmitted: (_) =>
-                    _submitForm(), // onSubmitted precisa de uma void Function(String)
-                decoration: InputDecoration(
-                  labelText: 'Valor (R\$)',
-                ),
+                keyBoardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitForm,
+                label: 'Valor (R\$)',
               ),
               Container(
                 height: 70,
