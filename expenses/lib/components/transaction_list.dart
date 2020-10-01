@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
-import 'package:intl/intl.dart'; // Pacote responsável pela formatação da data
+import './transaction_item.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -45,46 +45,9 @@ class TransactionList extends StatelessWidget {
             itemBuilder: (ctx, index) {
               // (itemBuilder)Só chama isso no momento que ele for precisando da informação, renderizar a lista toda de uma vez, o que atrapalha a performance do App
               final tr = transactions[index]; // recebe objeto transaction
-              return Card(
-                elevation: 5,
-                margin: EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 5,
-                ),
-                child: ListTile(
-                  // Widget especialista em listas
-                  leading: CircleAvatar(
-                    radius: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: FittedBox(
-                        // FittedBox -> Garante que os valores sejam alinhados
-                        child: Text('R\$${tr.value}'),
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    tr.title, // title da transaction
-                    // estilo definido para títulos
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  subtitle: Text(
-                    DateFormat('d MMM y').format(tr.date),
-                  ),
-                  trailing: MediaQuery.of(context).size.width > 400
-                      ? FlatButton.icon(
-                          onPressed: () => onRemove(tr.id),
-                          icon: const Icon(Icons.delete),
-                          label: const Text('Excluir'),
-                          textColor: Theme.of(context).errorColor,
-                        )
-                      : IconButton(
-                          //Botão para remover uma transação da lista
-                          icon: Icon(Icons.delete),
-                          color: Theme.of(context).errorColor,
-                          onPressed: () => onRemove(tr.id),
-                        ),
-                ),
+              return TransactionItem(
+                tr: tr,
+                onRemove: onRemove,
               );
             },
           );
