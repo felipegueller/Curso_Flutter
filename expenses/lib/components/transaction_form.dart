@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import './adaptative_button.dart';
 import './adaptative_textfield.dart';
+import './adptative_date_picker.dart';
 
 /* Essa classe tem que extender Stateful por que os componentes controles tem a sua mudança interna */
 class TransactionForm extends StatefulWidget {
@@ -34,31 +33,9 @@ class _TransactionFormState extends State<TransactionForm> {
     widget.onSubmit(title, value, _selectedDate);
   }
 
-  // função para abrir o modal de data no formulário
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019), // permite selecionar data a partir de 2019
-      lastDate: DateTime.now(), // só deixa selecionar até a data atual
-
-      // A função then tem como fucionalidade receber dados do futuro(Dados Assíncronos), ou seja, quando o usuário selecionar uma data ou fechar o modal, o then chama essa função anonima
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-
-      // alterando o estado interno quando a data for selecionada
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
-
-    print('Executado!');
-  }
-
   @override
   Widget build(BuildContext context) {
+    print('build() TransactionForm');
     return SingleChildScrollView(
       child: Card(
         elevation: 5,
@@ -82,30 +59,13 @@ class _TransactionFormState extends State<TransactionForm> {
                 onSubmitted: (_) => _submitForm,
                 label: 'Valor (R\$)',
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        // operação ternária indicando se a uma data selecionada ou não
-                        _selectedDate == null
-                            ? 'Nenhuma data selecionada!'
-                            : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                      ),
-                    ),
-                    FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      child: Text(
-                        'Selecionar Data',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onPressed: _showDatePicker,
-                    ),
-                  ],
-                ),
+              AdaptativeDatePicker(
+                selectedDate: _selectedDate,
+                onDateChanged: (newDate) {
+                  setState(() {
+                    _selectedDate = newDate;
+                  });
+                },
               ),
               Row(
                 mainAxisAlignment:

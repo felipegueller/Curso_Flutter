@@ -10,13 +10,14 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('build() TransactionList');
     return transactions.isEmpty
         ? LayoutBuilder(
             // constraints tem acesso as dimensões do componente
             builder: (ctx, constraints) {
               return Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     // Widget utilizado para dar espaço entre estruturas
                     height: 20,
                   ),
@@ -26,7 +27,7 @@ class TransactionList extends StatelessWidget {
                         .textTheme
                         .headline6, // Aplicando os estilos de texto por referência
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     height: constraints.maxHeight * 0.6,
                     child: Image.asset(
@@ -73,8 +74,8 @@ class TransactionList extends StatelessWidget {
                   trailing: MediaQuery.of(context).size.width > 400
                       ? FlatButton.icon(
                           onPressed: () => onRemove(tr.id),
-                          icon: Icon(Icons.delete),
-                          label: Text('Excluir'),
+                          icon: const Icon(Icons.delete),
+                          label: const Text('Excluir'),
                           textColor: Theme.of(context).errorColor,
                         )
                       : IconButton(
