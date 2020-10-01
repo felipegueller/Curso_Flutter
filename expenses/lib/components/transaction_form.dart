@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import './adaptative_button.dart';
+
 /* Essa classe tem que extender Stateful por que os componentes controles tem a sua mudança interna */
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime)
@@ -114,10 +116,8 @@ class _TransactionFormState extends State<TransactionForm> {
                 mainAxisAlignment:
                     MainAxisAlignment.end, // Eixo principal da Row ( Eixo X)
                 children: [
-                  RaisedButton(
-                    child: Text('Nova Transação'),
-                    color: Theme.of(context).primaryColor,
-                    textColor: Theme.of(context).textTheme.button.color,
+                  AdaptativeButton(
+                    label: 'Nova Transação',
                     onPressed: _submitForm,
                   ),
                 ],

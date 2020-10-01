@@ -107,98 +107,97 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _getIconButton(IconData icon, Function fn) {
-    return Platform.isIOS ? 
-    GestureDetector(onTap: fn, child: Icon(icon))
-    : IconButton(
-            icon: Icon(icon),
-            onPressed: fn 
-          );
+    return Platform.isIOS
+        ? GestureDetector(onTap: fn, child: Icon(icon))
+        : IconButton(icon: Icon(icon), onPressed: fn);
   }
-
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    final actions = <Widget>[
-        if (isLandscape)
-          _getIconButton(
-            _showChart ? Icons.list : Icons.show_chart,
-            () {
-              setState(() {
-                _showChart = !_showChart;
-              },
-              );
-            }
-          ),
-        _getIconButton(
-          Platform.isIOS ?CupertinoIcons.add : Icons.add,
-          () => _openTransactionFormModal(
-              context), 
-        ),
-      ];
+    final iconList = Platform.isIOS ? CupertinoIcons.refresh : Icons.list;
+    final iconChart =
+        Platform.isIOS ? CupertinoIcons.refresh : Icons.show_chart;
 
-    final PreferredSizeWidget appBar = Platform.isIOS 
-    ? CupertinoNavigationBar(
-      middle: Text('Despesas Pessoais'),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: actions,
+    final actions = <Widget>[
+      if (isLandscape)
+        _getIconButton(_showChart ? iconList : iconChart, () {
+          setState(
+            () {
+              _showChart = !_showChart;
+            },
+          );
+        }),
+      _getIconButton(
+        Platform.isIOS ? CupertinoIcons.add : Icons.add,
+        () => _openTransactionFormModal(context),
       ),
-    )
-    : AppBar(
-      title: Text('Despesas Pessoais'),
-      actions: actions, 
-      //centerTitle: true, // Define a posição ao centro
-    );
+    ];
+
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text('Despesas Pessoais'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: actions,
+            ),
+          )
+        : AppBar(
+            title: Text('Despesas Pessoais'),
+            actions: actions,
+            //centerTitle: true, // Define a posição ao centro
+          );
 
     // Altura total da tela - altura appBar - altura da barra de Status
     final availableHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top;
 
-    final bodyPage = SingleChildScrollView(
-      // habilita o scroll(rolagem) na tela
-      child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
-        children: <Widget>[
-          // if (isLandscape)
-          //   Row(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Text('Exibir Gráfico'),
-          //       Switch.adaptive(
-          //         activeColor: Theme.of(context).accentColor,
-          //         value: _showChart,
-          //         onChanged: (value) {
-          //           setState(() {
-          //             _showChart = value;
-          //           });
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          if (_showChart || !isLandscape)
-            Container(
-              height: availableHeight * (isLandscape ? 0.8 : 0.3),
-              child: Chart(_recentTransaction),
-            ),
-          if (!_showChart || !isLandscape)
-            // Widget do gráfico
-            Container(
-              height:
-                  availableHeight * (isLandscape ? 1 : 0.7), // altura resposiva
-              child: TransactionList(_transactions, _removeTransaction),
-            ), // Lista de Transações
-        ],
+    final bodyPage = SafeArea(
+      child: SingleChildScrollView(
+        // habilita o scroll(rolagem) na tela
+        child: Column(
+          crossAxisAlignment:
+              CrossAxisAlignment.stretch, // Eixo cruzado da Column (Eixo X)
+          children: <Widget>[
+            // if (isLandscape)
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text('Exibir Gráfico'),
+            //       Switch.adaptive(
+            //         activeColor: Theme.of(context).accentColor,
+            //         value: _showChart,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _showChart = value;
+            //           });
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            if (_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 0.8 : 0.3),
+                child: Chart(_recentTransaction),
+              ),
+            if (!_showChart || !isLandscape)
+              // Widget do gráfico
+              Container(
+                height: availableHeight *
+                    (isLandscape ? 1 : 0.7), // altura resposiva
+                child: TransactionList(_transactions, _removeTransaction),
+              ), // Lista de Transações
+          ],
+        ),
       ),
     );
 
     return Platform.isIOS
         ? CupertinoPageScaffold(
-          navigationBar: ,
+            navigationBar: appBar,
             child: bodyPage,
           )
         : Scaffold(
